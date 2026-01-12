@@ -1,0 +1,38 @@
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <% if (isLoggedIn){%>
+          <a class="navbar-brand" href="/">Hello <%=user.name %></a>
+        <% } else { %>
+          <a class="navbar-brand" href="/">NSS IITR</a>
+    <%}%>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+
+        <% if (isLoggedIn) { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/user/dashBoard">dashBoard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logOut">logOut</a>
+        </li>
+          <% } else { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signUp">Sign-Up</a>
+        </li>
+
+        <%}%>
+      </ul>
+    </div>
+  </div>
+</nav>
