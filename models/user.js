@@ -25,33 +25,36 @@ const donationSchema = new mongoose.Schema(
       default: Date.now,
     },
   },
-  { _id: false } // no need for separate _id for each donation
+  { _id: false }, // no need for separate _id for each donation
 );
 
-const UserSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    require: true,
+const UserSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      require: true,
+    },
+    email: {
+      type: String,
+      require: true,
+      unique: true,
+    },
+    salt: {
+      type: String,
+    },
+    password: {
+      type: String,
+      require: true,
+    },
+    role: {
+      type: String,
+      enum: ["admin", "user"],
+      default: "user",
+    },
+    donations: [donationSchema],
   },
-  email: {
-    type: String,
-    require: true,
-    unique: true,
-  },
-  salt: {
-    type: String,
-  },
-  password: {
-    type: String,
-    require: true,
-  },
-  role: {
-    type: String,
-    enum: ["admin", "user"],
-    default: "user",
-  },
-  donations: [donationSchema],
-},{ timestamps: true });
+  { timestamps: true },
+);
 
 UserSchema.pre("save", async function (next) {
   const user = this;

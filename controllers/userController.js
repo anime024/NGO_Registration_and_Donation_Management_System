@@ -19,7 +19,7 @@ async function handlelogin(req, res) {
     return res.redirect("/admin/dashboard");
   }
 
- return res.redirect("loginsuccess");
+  return res.redirect("loginsuccess");
 }
 
 async function handlesignUp(req, res) {

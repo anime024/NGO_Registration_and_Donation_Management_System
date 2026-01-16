@@ -2,7 +2,7 @@ const Razorpay = require("razorpay");
 const Order = require("../models/Order");
 const { getUser } = require("../services/auth");
 const User = require("../models/user");
-require("dotenv").config({path: "../.env"})
+require("dotenv").config({ path: "../.env" });
 let rzp = new Razorpay({
   key_id: process.env.KEYID, // your `KEY_ID`
   key_secret: process.env.KEYSECRET, // your `KEY_SECRET`
@@ -22,13 +22,13 @@ async function handleCreateOrder(req, res) {
 
     // ADD ORDER TO DB
     console.log("REQ USER IS ,", req.user);
-   const orderCreated= await Order.create({
+    const orderCreated = await Order.create({
       order_id: order.id,
       amount: order.amount,
       currency: order.currency,
       receipt: order.receipt,
       status: "created",
-      userEmail: req.user.email
+      userEmail: req.user.email,
     });
     const authorizationToken = req.cookies.token;
     const user = getUser(authorizationToken);
@@ -44,11 +44,11 @@ async function handleCreateOrder(req, res) {
           },
         },
       },
-      { new: true }
+      { new: true },
     );
 
     console.log("FROM /create-order ,", orderCreated);
-    console.log("FROM /CREATE ORDER USER IS ",user)
+    console.log("FROM /CREATE ORDER USER IS ", user);
     res.json(order); // Send order details to frontend, including order ID
   } catch (error) {
     console.error(error);
@@ -79,17 +79,17 @@ async function handleVerifyPayment(req, res) {
       {
         status: "paid",
         payment_id: razorpay_payment_id,
-      }
-      );
-      await User.updateOne(
-  { "donations.orderId": razorpay_order_id },
-  {
-    $set: {
-      "donations.$.status": "paid",
-    },
-  }
-);
-    
+      },
+    );
+    await User.updateOne(
+      { "donations.orderId": razorpay_order_id },
+      {
+        $set: {
+          "donations.$.status": "paid",
+        },
+      },
+    );
+
     if (!order) {
       return res.status(404).json({ message: "Order not found" });
     }

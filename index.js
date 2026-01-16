@@ -1,25 +1,24 @@
-require("dotenv").config({path: "./.env"})
-const express=require("express");
-const path=require("path");
-const cors =require("cors")
-const mongoose=require("mongoose");
-const connectDB= require("./db/index")
+require("dotenv").config({ path: "./.env" });
+const express = require("express");
+const path = require("path");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const connectDB = require("./db/index");
 
-const userRouter=require("./routes/userRoute");
-const staticRouter=require("./routes/staticRouter");
+const userRouter = require("./routes/userRoute");
+const staticRouter = require("./routes/staticRouter");
 const cookieParser = require("cookie-parser");
 const { attachUser } = require("./middleware/auth");
-const Razorpay = require('razorpay')
-const { validateWebhookSignature } = require('razorpay/dist/utils/razorpay-utils');
+const Razorpay = require("razorpay");
+const {
+  validateWebhookSignature,
+} = require("razorpay/dist/utils/razorpay-utils");
 const fs = require("fs");
-const paymentRouter=require("./routes/paymentRoute")
-const adminRouter=require("./routes/adminRoute")
+const paymentRouter = require("./routes/paymentRoute");
+const adminRouter = require("./routes/adminRoute");
 
-
-
-
-const app=express();
-const PORT =process.env.PORT || 8000;
+const app = express();
+const PORT = process.env.PORT || 8000;
 
 app.use(
   cors({
@@ -31,26 +30,22 @@ app.use(
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.set("view engine","ejs");
-app.set("views",path.resolve("./views"));
+app.set("view engine", "ejs");
+app.set("views", path.resolve("./views"));
 app.use(cookieParser());
-
-
 
 app.use(attachUser);
 
 app.use((req, res, next) => {
-    res.locals.user = req.user || null;
-    res.locals.isLoggedIn = !!req.user;
-    next();
+  res.locals.user = req.user || null;
+  res.locals.isLoggedIn = !!req.user;
+  next();
 });
 
-app.use("/user",userRouter);
-app.use("/",staticRouter);
-app.use("/payment",paymentRouter);
-app.use("/admin",adminRouter);
-
-
+app.use("/user", userRouter);
+app.use("/", staticRouter);
+app.use("/payment", paymentRouter);
+app.use("/admin", adminRouter);
 
 connectDB()
   .then(() => {

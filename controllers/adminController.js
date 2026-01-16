@@ -1,12 +1,12 @@
-const User=require("../models/user")
-const Order=require("../models/Order")
+const User = require("../models/user");
+const Order = require("../models/Order");
 
 async function handleadminDashboard(req, res) {
   try {
     const totalUsers = await User.countDocuments();
 
     const paidOrdersCount = await Order.countDocuments({
-      status: "paid"
+      status: "paid",
     });
 
     const donationSum = await Order.aggregate([
@@ -14,9 +14,9 @@ async function handleadminDashboard(req, res) {
       {
         $group: {
           _id: null,
-          totalAmount: { $sum: "$amount" }
-        }
-      }
+          totalAmount: { $sum: "$amount" },
+        },
+      },
     ]);
 
     const totalDonationAmount = donationSum[0]?.totalAmount || 0;
@@ -24,7 +24,7 @@ async function handleadminDashboard(req, res) {
     res.render("adminDashboard", {
       totalUsers,
       paidOrdersCount,
-      totalDonationAmount: totalDonationAmount / 100 // INR
+      totalDonationAmount: totalDonationAmount / 100, // INR
     });
   } catch (err) {
     console.error(err);
@@ -32,6 +32,4 @@ async function handleadminDashboard(req, res) {
   }
 }
 
-
-
-module.exports={handleadminDashboard}
+module.exports = { handleadminDashboard };

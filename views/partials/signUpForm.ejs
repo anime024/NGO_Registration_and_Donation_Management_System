@@ -1,13 +1,105 @@
-<form style="margin: 10px;" action="/user/signUp" method="post">
-  <div class="mb-3">
-    <label >Full Name</label>
-    <input type="text" class="form-control" id="name" name="fullName">
-  </div>
-    <label >Email address</label>
-    <input type="email" class="form-control" id="email"name="email" >
-  </div>
-    <label >Password</label>
-    <input type="password" class="form-control" id="password" name="password">
-  </div>
-  <button style="margin: 5px;" type="submit" class="btn btn-primary">Submit</button>
-</form>
+<style>
+  .signup-wrapper {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    padding: 20px;
+  }
+
+  .signup-card {
+    background: white;
+    padding: 35px;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  }
+
+  .signup-card h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #e76f51;
+    font-weight: bold;
+  }
+
+  .signup-card label {
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 6px;
+  }
+
+  .signup-card input {
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+
+  .signup-card input:focus {
+    border-color: #e76f51;
+    box-shadow: 0 0 0 0.15rem rgba(231, 111, 81, 0.25);
+  }
+
+  .signup-btn {
+    width: 100%;
+    margin-top: 20px;
+    background-color: #e76f51;
+    border: none;
+    padding: 12px;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .signup-btn:hover {
+    background-color: #d45d42;
+    transform: translateY(-2px);
+  }
+</style>
+
+<div class="signup-wrapper">
+  <form class="signup-card" action="/user/signUp" method="post">
+    <h2>Create Account</h2>
+
+    <div class="mb-3">
+      <label>Full Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="fullName"
+        placeholder="Enter your full name"
+        required
+      >
+    </div>
+
+    <div class="mb-3">
+      <label>Email Address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        placeholder="Enter your email"
+        required
+      >
+    </div>
+
+    <div class="mb-3">
+      <label>Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        placeholder="Create a password"
+        required
+      >
+    </div>
+
+    <button type="submit" class="btn signup-btn">
+      Sign Up
+    </button>
+  </form>
+</div>

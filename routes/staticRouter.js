@@ -1,24 +1,21 @@
-const express=require("express");
+const express = require("express");
 
-const staticRouter=express.Router();
+const staticRouter = express.Router();
 function renderLogin(req, res) {
   res.render("login", {
-    error: req.query.error || null
+    error: req.query.error || null,
   });
 }
 
+staticRouter.get("/", (req, res) => {
+  res.render("homePage");
+});
 
-staticRouter.get("/",(req,res)=>{
-    res.render("homePage");
-})
+staticRouter.get("/login", renderLogin);
 
+staticRouter.get("/signUp", (req, res, next) => {
+  res.render("signUp");
+  console.log("GET signup");
+});
 
-staticRouter.get("/login",renderLogin)
-
-staticRouter.get("/signUp",(req,res,next)=>{
-    res.render("signUp");
-        console.log("GET signup");
-
-})
-
-module.exports=staticRouter;
+module.exports = staticRouter;
