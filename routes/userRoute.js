@@ -1,5 +1,5 @@
 const express=require("express");
-const {handlelogin,handlesignUp,handledashBoard}=require("../controllers/userController")
+const {handlelogin,handlesignUp,handledashBoard,handleloginSuccess,handleConnectionBetweenUserAndPaymentPage,handleLogout}=require("../controllers/userController")
 const {checkForAuhentication,restrictTo}=require("../middleware/auth");
 const userRouter=express.Router();
 
@@ -11,15 +11,10 @@ userRouter.get("/dashBoard",checkForAuhentication,handledashBoard);
 userRouter.get("/thankYou",checkForAuhentication,(req,res)=>{
     res.json({message:"Thank You After Authorized"});
 })
+userRouter.get("/loginsuccess",checkForAuhentication,handleloginSuccess)
+userRouter.get("/payment",handleConnectionBetweenUserAndPaymentPage)
+userRouter.get("/logout",handleLogout)
 
 
-
-userRouter.get("/loginDone",(req,res)=>{
-    if(!req.cookies.token){
-        res.json({message:"NO LOGIN"})
-    }
-    else
-         res.json({message:" LOGIN done",token:req.cookies.token});
-})
 
 module.exports=userRouter;

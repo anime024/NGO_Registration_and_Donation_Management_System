@@ -40,4 +40,14 @@ function restrictTo(roles=[]){
 
 }
 
-module.exports={checkForAuhentication,attachUser,restrictTo}
+
+function requireadmin(req,res,next){
+    if(req.user.role!=="admin")
+    {
+        return res.status(403).send("Access denied")
+    }
+    next();
+}
+
+
+module.exports={checkForAuhentication,attachUser,restrictTo,requireadmin}

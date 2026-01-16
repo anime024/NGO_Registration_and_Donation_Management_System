@@ -1,0 +1,88 @@
+    <%- include('partials/header',{title:"PaymentPage"}) %>
+<body>
+      <%- include('partials/navbar') %>
+
+    <hr>
+
+    <h3>Make a Payment</h3>
+
+    <input
+        type="number"
+        id="amount"
+        placeholder="Enter amount (INR)"
+    />
+
+    <button onclick="payNow()">Pay Now</button>
+
+    <!-- Razorpay SDK -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <script>
+        async function payNow() {
+            const amount = document.getElementById("amount").value;
+
+            if (!amount || amount <= 0) {
+                alert("Enter a valid amount");
+                return;
+            }
+
+            // Create order from backend
+            const response = await fetch("/payment/create-order", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    amount: amount,
+                    currency: "INR",
+                    receipt: "receipt_login_success"
+                })
+            });
+
+            const order = await response.json();
+
+            const options = {
+                key: "rzp_test_S3N1xfoSZVzL3n", // test key
+                amount: order.amount,
+                currency: order.currency,
+                name: "NSS PRO",
+                description: "Payment after Login",
+                order_id: order.id,
+
+               handler: function (response) {
+                    fetch('/payment/verify-payment', {
+                      method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature
+            })
+          }).then(res => res.json())
+            .then(data => {
+              if (data.status === 'ok') {
+                window.location.href = '/payment/payment-success';
+              } else {
+                alert('Payment verification failed');
+              }
+            }).catch(error => {
+              console.error('Error:', error);
+              alert('Error verifying payment');
+            });
+               }
+            };
+
+            const rzp = new Razorpay(options);
+            rzp.open();
+        }
+    </script>
+
+     <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+</body>
+</html>

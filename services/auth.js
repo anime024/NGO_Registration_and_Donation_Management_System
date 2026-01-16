@@ -1,10 +1,11 @@
+require("dotenv").config({path:"../.env"})
 const jwt=require("jsonwebtoken");
-const secret="Animesh$123@$";
-
+const secret=process.env.SECRET
 function setUser(user){
     return jwt.sign({
         name:user.name,
         email:user.email,
+        role: user.role
     },secret);
 }
 

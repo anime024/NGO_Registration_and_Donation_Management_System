@@ -1,73 +1,94 @@
-const mongoose=require("mongoose");
-const {createHmac,randomBytes}=require("crypto");
+const mongoose = require("mongoose");
+const { createHmac, randomBytes } = require("crypto");
 
-const UserSchema=new mongoose.Schema({
-    name:{
-        type:String,
-        require:true,
+const donationSchema = new mongoose.Schema(
+  {
+    orderId: {
+      type: String,
+      required: true,
     },
-    email:{
-        type:String,
-        require:true,
-        unique:true,
+    amount: {
+      type: Number,
+      required: true,
     },
-    salt:{
-        type:String,
+    currency: {
+      type: String,
+      default: "INR",
     },
-    password:{
-        type:String,
-        require:true,
+    status: {
+      type: String,
+      enum: ["created", "paid", "failed"],
+      default: "created",
     },
-    role:{
-        type:String,
-        required:true,
-        default:"NORMAL",
-    }
-});
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+  },
+  { _id: false } // no need for separate _id for each donation
+);
 
+const UserSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    require: true,
+  },
+  email: {
+    type: String,
+    require: true,
+    unique: true,
+  },
+  salt: {
+    type: String,
+  },
+  password: {
+    type: String,
+    require: true,
+  },
+  role: {
+    type: String,
+    enum: ["admin", "user"],
+    default: "user",
+  },
+  donations: [donationSchema],
+},{ timestamps: true });
 
-UserSchema.pre("save",async function(next){
-    const user=this;
-    if(!user.isModified("password")) return next();
+UserSchema.pre("save", async function (next) {
+  const user = this;
+  if (!user.isModified("password")) return next();
 
-    const salt=randomBytes(16).toString("hex");
-    const hashedPassword=createHmac("sha256",salt)
+  const salt = randomBytes(16).toString("hex");
+  const hashedPassword = createHmac("sha256", salt)
     .update(user.password)
     .digest("hex");
 
-    this.salt=salt;
-    this.password=hashedPassword;
+  this.salt = salt;
+  this.password = hashedPassword;
 });
 
-UserSchema.static("matchPassword",async function(email,password){
-    const user=await this.findOne({email});
-    if(!user) {
-        return {success:false,message:"User not found"};
-    } 
+UserSchema.static("matchPassword", async function (email, password) {
+  const user = await this.findOne({ email });
+  if (!user) {
+    return { success: false, message: "User not found" };
+  }
 
-    const salt=user.salt;
-    const hashedPassword=user.password;
+  const salt = user.salt;
+  const hashedPassword = user.password;
 
-    const userProvidedHash=createHmac("sha256",salt)
+  const userProvidedHash = createHmac("sha256", salt)
     .update(password)
     .digest("hex");
 
-    if(userProvidedHash!==hashedPassword)
-    {
-        return {success:false,message:"password not matched"};        
-    }
-    else
-    {
-        const userObj=user.toObject();
-        delete userObj.password;
-        delete userObj.salt;
-        return {success:true,user:userObj};
+  if (userProvidedHash !== hashedPassword) {
+    return { success: false, message: "password not matched" };
+  } else {
+    const userObj = user.toObject();
+    delete userObj.password;
+    delete userObj.salt;
+    return { success: true, user: userObj };
+  }
+});
 
-    }
-         
+const User = mongoose.model("User", UserSchema);
 
-})
-
-const User=mongoose.model("User",UserSchema);
-
-module.exports=User;
+module.exports = User;
