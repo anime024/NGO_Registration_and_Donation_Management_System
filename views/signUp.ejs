@@ -1,12 +1,31 @@
 <%- include('partials/header',{title:"Sign-Up"}) %>
 
-
+<style>
+  .error-msg {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 12px;
+    margin: 10px auto;
+    width: 80%;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+</style>
 <body>
         <%- include('partials/navbar') %>
 
     <h1>SignUp-Page</h1>
+    <% if (error) { %>
+  <div class="error-msg">
+    <%= error %>
+  </div>
+<% } %>
 
-            <%- include('partials/signUpForm') %>
+
+
+              <%- include('partials/signUpForm') %>
 
     
 </body>

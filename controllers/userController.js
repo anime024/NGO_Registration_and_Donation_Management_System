@@ -22,14 +22,30 @@ async function handlelogin(req, res) {
 }
 
 async function handlesignUp(req, res) {
-  const { fullName, email, password } = req.body;
+  try{
+    const { fullName, email, password } = req.body;
   const user = await User.create({
     name: fullName,
     email: email,
     password: password,
   });
-  
+
   res.redirect("/");
+}catch (error) {
+
+    //  Duplicate email error
+    if (error.code === 11000) {
+      return res.status(409).render("signup", {
+        error: "Email already exists. Please login or use another email."
+      });
+    }
+
+    // Other errors
+    console.error(error);
+    return res.status(500).render("signup", {
+      error: "Something went wrong. Please try again."
+    });
+  }
 }
 
 async function handledashBoard(req, res) {

@@ -14,8 +14,7 @@ staticRouter.get("/", (req, res) => {
 staticRouter.get("/login", renderLogin);
 
 staticRouter.get("/signUp", (req, res, next) => {
-  res.render("signUp");
-  console.log("GET signup");
+  res.render("signUp",{error:null});
 });
 
 module.exports = staticRouter;
