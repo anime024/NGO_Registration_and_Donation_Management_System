@@ -1,112 +1,145 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>All Donations</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f4f8;
-            margin: 20px;
-            color: #333;
-        }
+  <meta charset="UTF-8">
+  <title>All Donations</title>
 
-        h2 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      margin: 20px;
+      color: #333;
+    }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            background-color: #fff;
-        }
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
 
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
-        }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      border: 1px solid #ddd;
+    }
 
-        th {
-            background-color: #3498db;
-            color: white;
-        }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+    }
 
-        tr:nth-child(even) {
-            background-color: #f2f6f9;
-        }
+    th {
+      background-color: #3498db;
+      color: #fff;
+      font-weight: 600;
+    }
 
-        tr:hover {
-            background-color: #d6eaf8;
-        }
+    tr:nth-child(even) {
+      background-color: #f5f5f5;
+    }
 
-        .status-paid {
-            color: green;
-            font-weight: bold;
-        }
+    tr:hover {
+      background-color: #eef3f8;
+    }
 
-        .status-created {
-            color: orange;
-            font-weight: bold;
-        }
-        .btn-back {
-            display: block;
-            margin: 20px auto 0;
-        }
-    </style>
-    <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
+    .status-paid {
+      color: green;
+      font-weight: 600;
+    }
+
+    .status-created {
+      color: orange;
+      font-weight: 600;
+    }
+
+    .donation-summary {
+      margin-top: 20px;
+      padding: 16px;
+      border: 1px solid #dcdcdc;
+      border-radius: 8px;
+      max-width: 320px;
+      background-color: #ffffff;
+    }
+
+    .donation-summary h3 {
+      margin: 0 0 6px 0;
+      font-size: 15px;
+      font-weight: 500;
+      color: #555;
+    }
+
+    .donation-amount {
+      font-size: 26px;
+      font-weight: 600;
+      color: #198754;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 8px 14px;
+      font-size: 14px;
+      color: #000;
+      text-decoration: none;
+      border: 1px solid #cfcfcf;
+      border-radius: 6px;
+      background-color: #f2f2f2;
+    }
+
+    .back-btn:hover {
+      background-color: #e6e6e6;
+    }
+  </style>
 </head>
+
 <body>
 
 <h2>All Donations (Paid + Created)</h2>
 
 <table>
+  <tr>
+    <th>Sr. No.</th>
+    <th>Order ID</th>
+    <th>Donor Email</th>
+    <th>Payment ID</th>
+    <th>Amount</th>
+    <th>Currency</th>
+    <th>Status</th>
+    <th>Date</th>
+  </tr>
+
+  <% if (orders.length === 0) { %>
     <tr>
-        <th>Sr. No.</th>
-        <th>Order ID</th>
-        <th>Donor Email</th>
-        <th>Payment ID</th>
-        <th>Amount</th>
-        <th>Currency</th>
-        <th>Status</th>
-        <th>Date</th>
+      <td colspan="8">No donations found</td>
     </tr>
+  <% } %>
 
-    <% if (orders.length === 0) { %>
-        <tr>
-            <td colspan="8">No donations found</td>
-        </tr>
-    <% } %>
-
-    <% orders.forEach((order, index) => { %>
-        <tr>
-            <td><%= index + 1 %></td> <!-- Serial number -->
-            <td><%= order.order_id %></td>
-            <td><%= order.userEmail ? order.userEmail : "Unknown" %></td>
-            <td><%= order.payment_id ? order.payment_id : "-" %></td>
-            <td>₹ <%= order.amount / 100 %></td>
-            <td><%= order.currency %></td>
-            <td class="<%= order.status === 'paid' ? 'status-paid' : 'status-created' %>">
-                <%= order.status.charAt(0).toUpperCase() + order.status.slice(1) %>
-            </td>
-            <td><%= order.createdAt.toLocaleString() %></td>
-        </tr>
-    <% }) %>
+  <% orders.forEach((order, index) => { %>
+    <tr>
+      <td><%= index + 1 %></td>
+      <td><%= order.order_id %></td>
+      <td><%= order.userEmail || "Unknown" %></td>
+      <td><%= order.payment_id || "-" %></td>
+      <td>₹ <%= order.amount / 100 %></td>
+      <td><%= order.currency %></td>
+      <td class="<%= order.status === 'paid' ? 'status-paid' : 'status-created' %>">
+        <%= order.status.charAt(0).toUpperCase() + order.status.slice(1) %>
+      </td>
+      <td><%= order.createdAt.toLocaleString() %></td>
+    </tr>
+  <% }) %>
 </table>
 
-<a href="/admin/dashboard" class="btn btn-secondary mt-3">
-    Back to Dashboard
-  </a>
+<div class="donation-summary">
+  <h3>Total Received Donation</h3>
+  <div class="donation-amount">₹ <%= totalDonationAmount %></div>
+</div>
 
-  <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"
-    ></script>
+<a href="/admin/dashboard" class="back-btn">← Back to Dashboard</a>
+
 </body>
 </html>
