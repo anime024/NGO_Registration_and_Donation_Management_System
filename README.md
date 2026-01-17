@@ -92,7 +92,6 @@ Make sure you have the following installed:
 - npm
 - MongoDB (local or cloud)
 
-```sh
 npm install npm@latest -g
 
 Installation
@@ -226,3 +225,5 @@ Animesh Raj
 GitHub: anime024
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+```sh
