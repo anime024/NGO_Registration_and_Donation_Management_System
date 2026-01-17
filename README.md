@@ -1,23 +1,12 @@
 # Nss-project
 
-<!-- Improved compatibility of back to top link -->
-<a id="readme-top"></a>
+The **NGO Registration and Donation Management System** is a backend-focused web application designed for NGOs and college/NSS-related initiatives.
 
-<br />
-<div align="center">
-  <h3 align="center">NGO Registration and Donation Management System</h3>
+The system **clearly separates user registration from donation workflows**, preventing unethical or forced payments while maintaining transparency and accountability. It supports secure user management, event/donation tracking, and online payments via Razorpay.
 
-  <p align="center">
-    A backend-driven system that separates user registration from donation flow,
-    ensuring data integrity, transparency, and ethical handling of payments.
-    <br />
-    <a href="https://github.com/anime024/NGO_Registration_and_Donation_Management_System"><strong>Explore the repository »</strong></a>
-    <br /><br />
-    <a href="https://github.com/anime024/NGO_Registration_and_Donation_Management_System/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/anime024/NGO_Registration_and_Donation_Management_System/issues">Request Feature</a>
-  </p>
-</div>
+This project was built as a **college/NSS-oriented system**, emphasizing ethical donation handling, clean backend architecture, and real-world payment integration.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
 
@@ -25,7 +14,7 @@
 <details>
   <summary>Click to expand</summary>
   <ol>
-    <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#project-overview">Project Overview</a></li>
     <li><a href="#built-with">Built With</a></li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -45,13 +34,21 @@
 
 ---
 
-## About The Project
+## Project Overview
 
-The **NGO Registration and Donation Management System** is a backend-focused web application designed for NGOs and college/NSS-related initiatives.
+This system allows organizations to:
 
-The system **clearly separates user registration from donation workflows**, preventing unethical or forced payments while maintaining transparency and accountability. It supports secure user management, event/donation tracking, and online payments via Razorpay.
+- Register users independently from donation flows
 
-This project was built as a **college/NSS-oriented system**, emphasizing ethical donation handling, clean backend architecture, and real-world payment integration.
+- Manage donations securely using Razorpay
+
+- Maintain transparency between registered users and payment records
+
+- Export donation data for reporting and auditing
+
+- Support college/NSS-style donation and event registration use cases
+
+The architecture emphasizes clean backend logic, secure payment handling, and scalability.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -59,14 +56,19 @@ This project was built as a **college/NSS-oriented system**, emphasizing ethical
 
 ## Built With
 
-- **Node.js**
-- **Express.js**
-- **MongoDB & Mongoose**
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB (Mongoose ODM)
 - **EJS (templating)**
-- **Razorpay Payment Gateway**
+- **Authentication**: JSON Web Tokens (JWT)
 - **JWT Authentication**
-- **ExcelJS (data export)**
-- **Bootstrap (UI styling)**
+- **Payment Gateway**: Razorpay
+- **Template Engine**: EJS
+- **Utilities**:
+   - ExcelJS (export donation records)
+  - Cookie Parser
+- **Dev Tools**:
+  - Nodemom
+  - Prettier
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -123,6 +125,8 @@ JWT_SECRET=your_jwt_secret_key
 ```
 
 ⚠️ Never commit your .env file to GitHub.
+
+⚠️ Use Razorpay Test Keys during development
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
