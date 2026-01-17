@@ -218,6 +218,7 @@ git checkout -b feature/YourFeature
 5. Open a Pull Request
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ---
 ### Contact
 
@@ -226,4 +227,3 @@ GitHub: anime024
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-```sh
