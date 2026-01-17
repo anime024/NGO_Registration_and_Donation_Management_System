@@ -221,7 +221,7 @@ git checkout -b feature/YourFeature
 - Animesh Raj
 GitHub: <a href="https://github.com/anime024">anime024</a>
 - Manish Kumar Gupta
-GitHub: <a href="https://github.com/manishkg027">manishkg027</a>
+GitHub: <a href="https://github.com/manishkg27">manishkg27</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
