@@ -39,7 +39,6 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -72,7 +71,6 @@ This project was built as a **college/NSS-oriented system**, emphasizing ethical
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
-
 ## Getting Started
 
 Follow these steps to set up the project locally.
@@ -88,7 +86,6 @@ Make sure you have the following installed:
 ```sh
 npm install npm@latest -g
    ```
----
 ### Installation
 1. Clone the repository
 ```sh
@@ -115,7 +112,6 @@ The server will run using nodemon for automatic reloads.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
----
 ### Environment Variables
 
 Create a .env file in the root directory and add:
