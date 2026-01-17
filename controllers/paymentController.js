@@ -21,7 +21,6 @@ async function handleCreateOrder(req, res) {
     const order = await rzp.orders.create(options);
 
     // ADD ORDER TO DB
-    console.log("REQ USER IS ,", req.user);
     const orderCreated = await Order.create({
       order_id: order.id,
       amount: order.amount,
@@ -47,8 +46,6 @@ async function handleCreateOrder(req, res) {
       { new: true },
     );
 
-    console.log("FROM /create-order ,", orderCreated);
-    console.log("FROM /CREATE ORDER USER IS ", user);
     res.json(order); // Send order details to frontend, including order ID
   } catch (error) {
     console.error(error);

@@ -5,7 +5,6 @@ function attachUser(req, res, next) {
   if (token) {
     const user = getUser(token);
     if (user) {
-      console.log("USER FROM ATTACHUSER IS ", user);
       req.user = user;
     }
   }

@@ -58,6 +58,7 @@
 
     .donation-summary {
       margin-top: 20px;
+      margin-bottom: 20px;
       padding: 16px;
       border: 1px solid #dcdcdc;
       border-radius: 8px;
@@ -93,13 +94,17 @@
     .back-btn:hover {
       background-color: #e6e6e6;
     }
+    
   </style>
 </head>
 
 <body>
 
 <h2>All Donations (Paid + Created)</h2>
-
+<div class="donation-summary">
+  <h3>Total Received Donation</h3>
+  <div class="donation-amount">₹ <%= totalDonationAmount %></div>
+</div>
 <table>
   <tr>
     <th>Sr. No.</th>
@@ -134,10 +139,7 @@
   <% }) %>
 </table>
 
-<div class="donation-summary">
-  <h3>Total Received Donation</h3>
-  <div class="donation-amount">₹ <%= totalDonationAmount %></div>
-</div>
+
 
 <a href="/admin/dashboard" class="back-btn">← Back to Dashboard</a>
 

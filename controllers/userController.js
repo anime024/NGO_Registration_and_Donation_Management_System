@@ -11,7 +11,6 @@ async function handlelogin(req, res) {
     return res.redirect(`/login?error=${encodeURIComponent(result.message)}`);
   }
 
-  console.log("USER MATCHED FOUND ", result.user);
   const token = setUser(result.user);
   res.cookie("token", token);
 
@@ -29,8 +28,7 @@ async function handlesignUp(req, res) {
     email: email,
     password: password,
   });
-  console.log(`USER IS ADDED IN MONGOOSE AND USER IS ${user}`);
-  console.log("FROM SIGNUP ", req);
+  
   res.redirect("/");
 }
 

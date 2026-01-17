@@ -181,7 +181,7 @@
             <td><%= user.email %></td>
             <td>
               <%= user.createdAt
-                ? new Date(user.createdAt).toLocaleDateString('en-IN')
+                ? new Date(user.createdAt).toLocaleString("en-IN")
                 : "N/A" %>
             </td>
           </tr>
@@ -189,6 +189,7 @@
       </tbody>
     </table>
   <% } %>
+
 
   <a href="/admin/dashboard" class="back-btn">← Back to Dashboard</a>
 
