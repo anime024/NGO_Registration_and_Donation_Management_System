@@ -219,7 +219,7 @@ git checkout -b feature/YourFeature
 ### Contact
 
 Animesh Raj
-GitHub: anime024
+GitHub: <a href="https://github.com/anime024">anime024</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
