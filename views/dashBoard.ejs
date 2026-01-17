@@ -1,123 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Profile Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            
-            background-color: #f4f6f9;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-         .page-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .profile-card {
-        
-            background-color: #ffffff;
-            padding: 30px 40px;
-            border-radius: 10px;
-            width: 320px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
+  <meta charset="UTF-8">
+  <title>Profile Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .profile-card h2 {
-            text-align: center;
-            margin-bottom: 25px;
-        }
+  <style>
+    body {
+      margin: 0;
+      background-color: #f4f6f9;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #333;
+    }
 
-        .profile-item {
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
+    .page-content {
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
 
-        .profile-item span {
-            font-weight: bold;
-            color: #333;
-        }
-    </style>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-      crossorigin="anonymous"
-    />
+    .profile-card {
+      background-color: #ffffff;
+      padding: 30px 40px;
+      border-radius: 10px;
+      width: 320px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-card h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .profile-item {
+      margin-bottom: 15px;
+      font-size: 15px;
+    }
+
+    .profile-item span {
+      font-weight: bold;
+    }
+
+    /* Donations Section */
+
+    .donations-section {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .donations-section h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 20px;
+      color: #2c3e50;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    th {
+      background-color: #2c3e50;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f6f6f6;
+    }
+
+    .status-paid {
+      color: green;
+      font-weight: 600;
+    }
+
+    .status-created {
+      color: orange;
+      font-weight: 600;
+    }
+
+    .status-failed {
+      color: red;
+      font-weight: 600;
+    }
+
+    .no-donations {
+      text-align: center;
+      color: #777;
+      font-size: 14px;
+    }
+  </style>
 </head>
+
 <body>
-     <%- include('partials/navbar') %>
-         <div class="page-content">
-    <div class="profile-card" >
-        <h2>User Profile</h2>
 
-        <div class="profile-item">
-            <span>Name:</span> <%=userProfile.name%>
-        </div>
+<%- include('partials/navbar') %>
 
-        <div class="profile-item">
-            <span>Email:</span> <%=userProfile.email%>
-        </div>
+<div class="page-content">
+  <div class="profile-card">
+    <h2>User Profile</h2>
 
-        <div class="profile-item">
-            <span>Role:</span> <%=userProfile.role%>
-        </div>
+    <div class="profile-item">
+      <span>Name:</span> <%= userProfile.name %>
     </div>
-        </div>
-        <div class="container mt-5">
-  <h3 class="text-center mb-4">Your Donations</h3>
 
-  <% if (userProfile.donations && userProfile.donations.length > 0) { %>
-    <div class="table-responsive">
-      <table class="table table-bordered table-hover align-middle">
-        <thead class="table-dark">
-          <tr>
-            <th>#</th>
-            <th>Order ID</th>
-            <th>Amount (₹)</th>
-            <th>Status</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% userProfile.donations.forEach((donation, index) => { %>
-            <tr>
-              <td><%= index + 1 %></td>
-              <td style="font-size: 13px;"><%= donation.orderId %></td>
-              <td><strong>₹ <%= donation.amount %></strong></td>
-
-              <td>
-                <% if (donation.status === "paid") { %>
-                  <span class="badge bg-success">Paid</span>
-                <% } else if (donation.status === "created") { %>
-                  <span class="badge bg-warning text-dark">Pending</span>
-                <% } else { %>
-                  <span class="badge bg-danger">Failed</span>
-                <% } %>
-              </td>
-
-              <td>
-                <%= new Date(donation.createdAt).toLocaleDateString("en-IN") %>
-              </td>
-            </tr>
-          <% }) %>
-        </tbody>
-      </table>
+    <div class="profile-item">
+      <span>Email:</span> <%= userProfile.email %>
     </div>
-  <% } else { %>
-    <p class="text-center text-muted">You have not made any donations yet.</p>
-  <% } %>
+
+    <div class="profile-item">
+      <span>Role:</span> <%= userProfile.role %>
+    </div>
+  </div>
 </div>
 
+<div class="donations-section">
+  <h3>Your Donations</h3>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"
-    ></script>
+  <% if (userProfile.donations && userProfile.donations.length > 0) { %>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Order ID</th>
+        <th>Amount (₹)</th>
+        <th>Status</th>
+        <th>Date</th>
+      </tr>
+
+      <% userProfile.donations.forEach((donation, index) => { %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td style="font-size: 13px;"><%= donation.orderId %></td>
+          <td><strong>₹ <%= donation.amount %></strong></td>
+
+          <td class="
+            <%= donation.status === 'paid' ? 'status-paid' : 
+                donation.status === 'created' ? 'status-created' : 
+                'status-failed' %>">
+            <%= donation.status.charAt(0).toUpperCase() + donation.status.slice(1) %>
+          </td>
+
+          <td>
+            <%= new Date(donation.createdAt).toLocaleString("en-IN") %>
+          </td>
+        </tr>
+      <% }) %>
+    </table>
+  <% } else { %>
+    <p class="no-donations">You have not made any donations yet.</p>
+  <% } %>
+</div>
 
 </body>
 </html>
