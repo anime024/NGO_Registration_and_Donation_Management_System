@@ -28,7 +28,7 @@ This project was built as a **college/NSS-oriented system**, emphasizing ethical
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#authors">Authors</a></li>
   </ol>
 </details>
 
@@ -58,11 +58,9 @@ The architecture emphasizes clean backend logic, secure payment handling, and sc
 
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB (Mongoose ODM)
-- **EJS (templating)**
 - **Authentication**: JSON Web Tokens (JWT)
-- **JWT Authentication**
 - **Payment Gateway**: Razorpay
-- **Template Engine**: EJS
+- **Template Engine**: EJS + HTML + CSS
 - **Utilities**:
    - ExcelJS (export donation records)
   - Cookie Parser
@@ -118,10 +116,12 @@ The server will run using nodemon for automatic reloads.
 
 Create a .env file in the root directory and add:
 ```sh
+PORT=8000
+CORS_ORIGIN=* #http://localhost:5173,http://example.com
 MONGODB_URI=your_mongodb_connection_string
-RAZORPAY_KEY_ID=your_razorpay_key_id
-RAZORPAY_KEY_SECRET=your_razorpay_key_secret
-JWT_SECRET=your_jwt_secret_key
+KEYID=your_razorpay_key_id
+KEYSECRET=your_razorpay_key_secret
+SECRET=your_jwt_secret_key
 ```
 
 ⚠️ Never commit your .env file to GitHub.
@@ -161,12 +161,9 @@ JWT_SECRET=your_jwt_secret_key
 - Donations are processed securely through Razorpay
 
 - Admins can track:
-
-- Registered users
-
-- Successful payments
-
-- Total donations
+   - Registered users
+   - Successful payments
+   - Total donations
 
 - Data integrity is maintained via proper schema separation in MongoDB
 
@@ -220,12 +217,18 @@ git checkout -b feature/YourFeature
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
-### Contact
+### Authors
+**Name:** Animesh Raj
 
-- Animesh Raj
-GitHub: <a href="https://github.com/anime024">anime024</a>
-- Manish Kumar Gupta
-GitHub: <a href="https://github.com/manishkg27">manishkg27</a>
+- 🎓 B.Tech Student, IIT Roorkee 
+- **Email:** animeshraj1618@gmail.com
+- GitHub: <a href="https://github.com/anime024">anime024</a>
+
+**Name:** Manish Kumar Gupta
+
+- 🎓 B.Tech Student, IIT Roorkee 
+- **Email:** manishkumarguptamns5@gmail.com
+- GitHub: <a href="https://github.com/manishkg27">manishkg27</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
