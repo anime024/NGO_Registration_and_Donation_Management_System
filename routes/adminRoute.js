@@ -14,10 +14,14 @@ adminRouter.get(
   requireadmin,
   handleadminDashboard
 );
-adminRouter.get("/viewallregistrations", handleviewallregistrations);
+adminRouter.get("/viewallregistrations",checkForAuhentication,
+  requireadmin, handleviewallregistrations);
 
-adminRouter.get("/viewsuccessfulldonations", handleviewsuccessfulldonations);
+adminRouter.get("/viewsuccessfulldonations",checkForAuhentication,
+  requireadmin, handleviewsuccessfulldonations);
 
-adminRouter.get("/viewalldonations", handleviewalldonations);
-adminRouter.get("/exportUser", handleexportUser);
+adminRouter.get("/viewalldonations",checkForAuhentication,
+  requireadmin, handleviewalldonations);
+adminRouter.get("/exportUser",checkForAuhentication,
+  requireadmin, handleexportUser);
 module.exports = adminRouter;

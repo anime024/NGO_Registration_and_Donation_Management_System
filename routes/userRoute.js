@@ -7,7 +7,7 @@ const {
   handleConnectionBetweenUserAndPaymentPage,
   handleLogout,
 } = require("../controllers/userController");
-const { checkForAuhentication, restrictTo } = require("../middleware/auth");
+const { checkForAuhentication } = require("../middleware/auth");
 const userRouter = express.Router();
 
 userRouter.post("/login", handlelogin);
