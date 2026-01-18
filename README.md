@@ -229,6 +229,11 @@ git checkout -b feature/YourFeature
 - 🎓 B.Tech Student, IIT Roorkee 
 - **Email:** manishkumarguptamns5@gmail.com
 - GitHub: <a href="https://github.com/manishkg27">manishkg27</a>
+**Name:** ASHISH KUMAR
+
+- 🎓 B.Tech Student, IIT Roorkee 
+- **Email:** ashishk7.ak7@gmail.com
+- GitHub: <a href="https://github.com/ARC-FROST">ARC-FROST</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
