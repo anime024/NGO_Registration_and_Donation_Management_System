@@ -4,7 +4,9 @@ const excelJS=require("exceljs");
 
 async function handleadminDashboard(req, res) {
   try {
-    const totalUsers = await User.countDocuments();
+    const totalUsers = await User.countDocuments({
+      role: { $ne: "admin" }
+    });
 
     const paidOrdersCount = await Order.countDocuments({
       status: "paid",
@@ -36,8 +38,11 @@ async function handleadminDashboard(req, res) {
 async function handleviewallregistrations(req, res) {
   try {
     const { name, fromDate, toDate } = req.query;
-    let filter = {};
-    if (name) {
+// filter to exclude admin users
+    let filter = {
+      role: { $ne: "admin" }
+    };
+        if (name) {
       filter.name = { $regex: name, $options: "i" };
     }
     if (fromDate || toDate) {

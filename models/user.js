@@ -25,7 +25,7 @@ const donationSchema = new mongoose.Schema(
       default: Date.now,
     },
   },
-  { _id: false }, // no need for separate _id for each donation
+  { _id: false }, 
 );
 
 const UserSchema = new mongoose.Schema(

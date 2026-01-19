@@ -8,7 +8,14 @@ function renderLogin(req, res) {
 }
 
 staticRouter.get("/", (req, res) => {
-  res.render("homePage");
+  if (req.user && req.user.role === "admin") {
+    return res.redirect("/admin/dashboard");
+  }
+
+  res.render("homePage", {
+    isLoggedIn: !!req.user,
+    user: req.user
+  });
 });
 
 staticRouter.get("/login", renderLogin);

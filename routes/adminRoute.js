@@ -5,8 +5,7 @@ const {
   handleadminDashboard,
   handleviewallregistrations,handleviewsuccessfulldonations,handleviewalldonations,handleexportUser
 } = require("../controllers/adminController");
-const User = require("../models/user");
-const Order = require("../models/Order");
+
 
 adminRouter.get(
   "/dashboard",

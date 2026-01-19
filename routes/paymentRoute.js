@@ -6,7 +6,6 @@ const {
 } = require("../controllers/paymentController");
 const paymentRouter = express.Router();
 
-// Function to read data from JSON file
 
 // Route to handle order creation
 paymentRouter.post("/create-order", handleCreateOrder);
