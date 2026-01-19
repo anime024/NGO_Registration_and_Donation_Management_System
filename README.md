@@ -229,6 +229,7 @@ git checkout -b feature/YourFeature
 - 🎓 B.Tech Student, IIT Roorkee 
 - **Email:** manishkumarguptamns5@gmail.com
 - GitHub: <a href="https://github.com/manishkg27">manishkg27</a>
+
 **Name:** ASHISH KUMAR
 
 - 🎓 B.Tech Student, IIT Roorkee 
